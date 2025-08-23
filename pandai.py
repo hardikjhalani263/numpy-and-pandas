@@ -38,5 +38,113 @@ import pandas as pd
 # a = pd.read_csv(r"C:\Users\hp\pandai\emp_data.csv")
 # print(a)
 
-a = pd.read_csv(r"C:\Users\hp\pandai\flipcartphone.csv")
-print (a)
+# a = pd.read_csv(r"C:\Users\hp\pandai\flipcartphone.csv")
+# print (a)
+
+df = pd.read_csv(r"C:\Users\hp\pandai\covid_toy - covid_toy.csv")
+# print (df.head(3))
+
+# print (df.dtypes)
+
+# df['age'] = df['age'].astype(float)
+
+# df = df.dropna()
+# print (df)
+
+# print (df.filter(items = ['age' , 'gender']))  ### column wise filteration
+
+# print (df[['fever' , 'has_covid']])
+
+# print (df.loc[5:8])   ## for row wise filteration
+
+# print(df.head(4))
+
+# print(df.values)   ### it will return all the values
+
+# a = df.columns
+
+# a = a.to_list()
+
+# a[0] = "updated_age"
+# a[4] = "updated_city"
+
+# print (a)
+
+# new_df = pd.DataFrame(df.values , columns = a)
+
+# print (new_df)
+
+# second method 
+
+# df.head(3)
+
+# df = df.rename(columns = {"age":"latest_age" , "city":"latest_city"})
+# print (df)
+
+# Concatenation in Pandas ---> Using this method we can combine multiple dataframe .
+# data1 = {'Name': ['Jai', 'Princi', 'Gaurav', 'Anuj'],
+#          'Age': [27, 24, 22, 32],
+#          'Address': ['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+#          'Qualification': ['Msc', 'MA', 'MCA', 'Phd']}
+# df1 = pd.DataFrame(data1 , index = [0,1,2,3])
+
+# data2 = {'Name': ['Abhi', 'Ayushi', 'Dhiraj', 'Hitesh'],
+#          'Age': [17, 14, 12, 52],
+#          'Address': ['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+#          'Qualification': ['Btech', 'B.A', 'Bcom', 'B.hons']}
+# df2 = pd.DataFrame(data2 , index = [4,5,6,7])
+
+# a = [df1,df2]
+
+# print(pd.concat(a))
+
+
+# df1 = pd.DataFrame(data1 , index = [0,1,2,3])
+# df2 = pd.DataFrame(data2 , index = [4,5,6,7])
+
+# res2 = pd.concat([df1, df2], axis=1, join='outer')
+# print(res2)
+
+# Ignore_Index  ---> the indexes of the original DataFrames may not be relevant.
+# We can ignore the indexes and reset them using the ignore_index argument.
+
+# df1 = pd.DataFrame(data1,index=[0, 1, 2, 3])
+# df2 = pd.DataFrame(data2, index=[2, 3, 6, 7])
+
+# res = pd.concat([df2, df1], ignore_index=True)
+# print(res)
+
+# frames = [df1, df2 ]
+
+# res = pd.concat(frames, keys=['x', 'y'])
+# print(res)
+
+# # Concat Mix data
+# We can also concatenate a mix of Series and DataFrames. If we include a Series in the list,
+# it will automatically be converted to a DataFrame and we can specify the column name.
+
+data1 = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age':[27, 24, 22, 32],
+        'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
+
+df1 = pd.DataFrame(data1,index=[0, 1, 2, 3])
+s1 = pd.Series([1000, 2000, 3000, 4000], name='Salary')
+
+a = pd.concat([df1,s1]  , ignore_index=True)
+print(a.columns)
+
+a = a.rename(columns = {0:"Salary"})
+a.head(3)
+
+a['Salary'].mean()
+
+a['Salary'] = a['Salary'].fillna(a['Salary'].mean())
+
+a['Address'][4:8] = 'Jaipur'
+
+a.isnull().sum()
+
+a['Age'] = a['Age'].fillna(a['Age'].mean())
+
+print(a)
