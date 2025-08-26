@@ -41,7 +41,7 @@ import pandas as pd
 # a = pd.read_csv(r"C:\Users\hp\pandai\flipcartphone.csv")
 # print (a)
 
-df = pd.read_csv(r"C:\Users\hp\pandai\covid_toy - covid_toy.csv")
+# df = pd.read_csv(r"C:\Users\hp\pandai\covid_toy - covid_toy.csv")
 # print (df.head(3))
 
 # print (df.dtypes)
@@ -82,6 +82,8 @@ df = pd.read_csv(r"C:\Users\hp\pandai\covid_toy - covid_toy.csv")
 # print (df)
 
 # Concatenation in Pandas ---> Using this method we can combine multiple dataframe .
+
+
 # data1 = {'Name': ['Jai', 'Princi', 'Gaurav', 'Anuj'],
 #          'Age': [27, 24, 22, 32],
 #          'Address': ['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
@@ -123,28 +125,116 @@ df = pd.read_csv(r"C:\Users\hp\pandai\covid_toy - covid_toy.csv")
 # We can also concatenate a mix of Series and DataFrames. If we include a Series in the list,
 # it will automatically be converted to a DataFrame and we can specify the column name.
 
-data1 = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
-        'Age':[27, 24, 22, 32],
-        'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
-        'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
+# data1 = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+#         'Age':[27, 24, 22, 32],
+#         'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+#         'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
 
-df1 = pd.DataFrame(data1,index=[0, 1, 2, 3])
-s1 = pd.Series([1000, 2000, 3000, 4000], name='Salary')
+# df1 = pd.DataFrame(data1,index=[0, 1, 2, 3])
+# s1 = pd.Series([1000, 2000, 3000, 4000], name='Salary')
 
-a = pd.concat([df1,s1]  , ignore_index=True)
-print(a.columns)
+# a = pd.concat([df1,s1]  , ignore_index=True)
+# print(a.columns)
 
-a = a.rename(columns = {0:"Salary"})
-a.head(3)
+# a = a.rename(columns = {0:"Salary"})
+# a.head(3)
 
-a['Salary'].mean()
+# a['Salary'].mean()
 
-a['Salary'] = a['Salary'].fillna(a['Salary'].mean())
+# a['Salary'] = a['Salary'].fillna(a['Salary'].mean())
 
-a['Address'][4:8] = 'Jaipur'
+# a['Address'][4:8] = 'Jaipur'
 
-a.isnull().sum()
+# a.isnull().sum()
 
-a['Age'] = a['Age'].fillna(a['Age'].mean())
+# a['Age'] = a['Age'].fillna(a['Age'].mean())
 
-print(a)
+# print(a)
+
+# data1 = {'key': ['K0', 'K1', 'K2', 'K3'],
+#          'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+#         'Age':[27, 24, 22, 32],}
+
+# data2 = {'key': ['K0', 'K1', 'K2', 'K3'],
+#          'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+#         'Qualification':['Btech', 'B.A', 'Bcom', 'B.hons']}
+
+# df1 = pd.DataFrame(data1)
+# df2 = pd.DataFrame(data2)
+
+# Perform merginig based on key
+
+# res = pd.merge(df1, df2, on='key')
+# print (res)
+
+
+# ----->  Merginig with different keys
+
+# data1 = {'key': ['K0', 'K1', 'K2', 'K3'],
+#          'key1': ['K0', 'K1', 'K0', 'K1'],
+#          'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+#         'Age':[27, 24, 22, 32],}
+
+# data2 = {'key': ['K0', 'K1', 'K2', 'K3'],
+#          'key1': ['K0', 'K0', 'K0', 'K0'],
+#          'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+#         'Qualification':['Btech', 'B.A', 'Bcom', 'B.hons']}
+
+# df1 = pd.DataFrame(data1)
+# df2 = pd.DataFrame(data2)
+
+# res1 = pd.merge(df1, df2, on=['key1', 'key'])
+# print (res1)
+
+# -------->  Joins using merginig
+data1 = {'key': ['K0', 'K1', 'K2', 'K3'],
+         'key1': ['K0', 'K1', 'K0', 'K1'],
+         'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age':[27, 24, 22, 32],}
+
+data2 = {'key': ['K0', 'K1', 'K2', 'K3'],
+         'key1': ['K0', 'K0', 'K0', 'K0'],
+         'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'],
+        'Qualification':['Btech', 'B.A', 'Bcom', 'B.hons']}
+
+df1 = pd.DataFrame(data1)
+df2 = pd.DataFrame(data2)
+# left joint 
+res = pd.merge(df1, df2, how='left', on=['key', 'key1'])
+print (res)
+
+
+
+
+
+# EDA ----> Exploratory Data Analysis
+
+# (1). Descrete Data ---> We cannot dividie furthur in more specific  parts .
+# Ex. fever(yes,no) , martial status(yes, no) , total number of employees in a office(500,501)
+# (2). Continous Data  ---> We can divide frthur in more specific parts .
+# Ex. date_of_birth , distance , weight , height
+
+# (1). Univariate Analysis ---> Perform operation on single column .
+# (2). Bivariate Analysis  ---> Perform operation on 2 columns .
+# (3). Multivariate Analysis  ----> Perform operation on more than 2 columns
+
+# Data Visualization Libraries
+# Matplotlib
+# Seaborn
+
+# df = pd.read_csv(r'C:\Users\hp\pandai\titanic.csv')
+# # print (df.head(3))
+
+# import matplotlib.pyplot as plt 
+# import seaborn as sns
+
+# # (1). Univariate Analysis
+# print (df['Survived'].value_counts())
+# sns.countplot(x = df['Survived'])
+
+# # print (df['Survived'].value_counts().plot(kind = 'pie' , autopct= "%.2f"))
+# # print (df['Pclass'].value_counts().plot(kind = "bar"))
+
+# plt.hist(x = df['Age'])
+# print(df['Fare'].isnull().sum())
+# df['Fare'] = df['Fare'].fillna(df['Fare'].mean())
